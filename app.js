@@ -6,9 +6,9 @@ const readline = require('readline').createInterface({
 	output: process.stdout
 });
 
-const mongoUrl = '';
 
 // =============== Mongoose Setup ===============
+const mongoUrl = '';
 mongoose.connect(mongoUrl, {useNewUrlParser: true, useUnifiedTopology: true});
 // ============================================
 
