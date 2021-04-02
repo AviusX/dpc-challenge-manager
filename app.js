@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
-const fs = require("fs");
 const readline = require('readline').createInterface({
 	input: process.stdin,
 	output: process.stdout
 });
+const config = require('./config');
 
 
 // =============== Mongoose Setup ===============
-const mongoUrl = '';
-mongoose.connect(mongoUrl, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(config.mongoUrl, {useNewUrlParser: true, useUnifiedTopology: true});
 // ============================================
 
 // =============== Schema Setup ===============
@@ -23,15 +22,14 @@ const flagRegExp = /FRIGIDSEC-DPC\{.+\}/;
 // ============================================
 
 // =============== Crypto Setup ===============
-const secret = fs.readFileSync(__dirname + '/secret.txt', 'utf8').trim();
-const sha256Hasher = crypto.createHmac("sha256", secret);
+const sha256Hasher = crypto.createHmac("sha256", config.secret);
 // ============================================
 
 // =============== Core Logic ===============
 console.log("1. Add a new challenge");
 console.log("2. View existing challenges");
 console.log("3. Delete a challenge");
-console.log("4. Search a challenge");
+console.log("4. Search for a challenge");
 console.log("5. Exit");
 
 readline.question("What do you want to do? (1/2/3/4/5): ", choice => {
